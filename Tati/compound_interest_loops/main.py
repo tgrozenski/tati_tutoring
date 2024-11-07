@@ -37,6 +37,15 @@ def get_monthly_interest(deposit: float, monthly_interest_rate: float, months: f
 
     return deposit
 
+
+    # goal = 1000
+    # depoit = 10
+    # months_count = 0
+
+    # while (deposit < goal):
+        # continue compounding
+        # increase months count by 1
+
 def main():
     
     # conditional -- something that will be true or false
