@@ -1,37 +1,41 @@
-def get_and_validate_input(msg: str):
+def get_and_validate_input(msg: str, zero: bool):
 
     valid: bool = False
-    while (valid == False):
+    while (valid is False):
         user_input = input(msg)
         # isnumeric() will return true if string is numeric, and false if string is not numeric
         # cats and dogs user_input.isnumeric() returns false
         # 1000 user_input.isnumeric() returns true
-        if (user_input.isnumeric()):
+
+        filtered_str = ""
+
+        for letter in user_input:
+            if(letter != '.'):
+                filtered_str += letter
+
+        if (filtered_str.isnumeric()):
             # turns string into number
-            number = int(user_input)
-            if (number != 0):
+            number = float(user_input)
+
+            if (zero == False):
+                if (number != 0):
+                    valid = True
+                    return number
+            else:
                 valid = True
                 return number
-        else:
-            print('Please enter a numeric value')
 
-def get_and_validate_goal(msg: str):
-
-    while (True):
-        user_input = input(msg)
-        # isnumeric() will return true if string is numeric, and false if string is not numeric
-        # cats and dogs user_input.isnumeric() returns false
-        # 1000 user_input.isnumeric() returns true
-        if (user_input[0] == '-'):
-            user_input = user_input[1:]
-        if (user_input.isnumeric()):
-            # turns string into number
-            return int(user_input)
-
-        else:
-            print('Please enter a numeric value')
+        print('Please enter a positive nonzero numeric value')
 
 # ("1000" == 1000) False
+
+def get_monthly_interest(deposit: float, monthly_interest_rate: float, months: float):
+    for i in range(int(months)):
+        # total amount in the account
+        deposit = deposit + (deposit * monthly_interest_rate)
+        print(deposit)
+
+    return deposit
 
 def main():
     
@@ -47,26 +51,30 @@ def main():
     
     # for index in range(10):
     #     print(index)
+    
 
-    # deposit = get_and_validate_input('Please enter a deposit ')
-    # interest_rate = get_and_validate_input('Please enter an interest rate ')
-    # number_of_months = get_and_validate_input('Please enter an number of months')
-    # goal = get_and_validate_goal('Please enter a goal ')
+    deposit = get_and_validate_input('Please enter a deposit ', False)
+    interest_rate = get_and_validate_input('Please enter an interest rate ', False)
+    number_of_months = get_and_validate_input('Please enter an number of months', False)
+    goal = get_and_validate_input('enter your goal ', True)
+
+    monthly_interest_rate = interest_rate / 12
+
+    # print(f"The deposit you entered was: {deposit}, the interest rate is {interest_rate}, Number of months {number_of_months}, You goal is {goal}")
+    # print("Monthly interest rate is:", monthly_interest_rate)
+
+    print(get_monthly_interest(deposit, monthly_interest_rate, number_of_months))
 
     # print(deposit, interest_rate, number_of_months, goal)
 
-    string = "-1000"
-    # - 0
-    # 1 1
-    # 0 2
-    # 0 3
-    # 0 4
-    string_slice = string[1:]
-    print(string_slice)
-    # print(string.isnumeric())
+    # string = "1000"
+
+    # if ('-' in string):
+    #     print('The user entered a negative number')
+    # else:
+    #     print('the user entered a positive number')
 
 
     
-
 if(__name__ == "__main__"):
     main()
